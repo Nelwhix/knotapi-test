@@ -11,7 +11,7 @@ class StoreCardRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class StoreCardRequest extends FormRequest
             'card_number' => 'required|string|min:8|max:19',
             'cvv' => 'required|string|min:3|max:4',
             // to match 09/12 etc. exp in card numbers
-            'expiration' => ['required', 'regex:^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$']
+            'expiration' => ['required', 'regex:^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$^']
         ];
     }
 }

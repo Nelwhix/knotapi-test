@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cards', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid('id');
             $table->foreignUuid('user_id');
             $table->string('card_number');
             $table->string('cvv');

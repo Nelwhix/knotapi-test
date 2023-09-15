@@ -8,9 +8,30 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use OpenApi\Attributes as OA;
+
 
 class AuthenticatedSessionController extends Controller
 {
+    #[OA\Post(
+        path: "/api/v1/auth/login",
+        summary: "login",
+        requestBody: new OA\RequestBody(required: true,
+            content: new OA\MediaType(mediaType: "application/json",
+                schema: new OA\Schema(required: ["email", "password"],
+                    properties: [
+                        new OA\Property(property: 'email', description: "User email", type: "string"),
+                        new OA\Property(property: 'password', description: "User password", type: "string"),
+                    ]
+                ))),
+        tags: ["Auth"],
+        responses: [
+            new OA\Response(response: Response::HTTP_OK, description: "login success"),
+            new OA\Response(response: Response::HTTP_UNPROCESSABLE_ENTITY, description: "Unprocessable entity"),
+            new OA\Response(response: Response::HTTP_BAD_REQUEST, description: "Bad Request"),
+            new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+        ]
+    )]
     public function store(LoginRequest $request) {
         $fields = $request->validated();
 
