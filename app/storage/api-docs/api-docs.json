@@ -12,70 +12,13 @@
         }
     ],
     "paths": {
-        "/api/v1/card": {
-            "post": {
-                "tags": [
-                    "Card"
-                ],
-                "summary": "store new card",
-                "operationId": "10aa39e9a858fafb9d0dc09fa5625d19",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "card_number",
-                                    "cvv",
-                                    "expiration"
-                                ],
-                                "properties": {
-                                    "card_number": {
-                                        "description": "Card Number",
-                                        "type": "string"
-                                    },
-                                    "cvv": {
-                                        "description": "Card CVV",
-                                        "type": "string"
-                                    },
-                                    "expiration": {
-                                        "description": "card expiry",
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Register Successfully"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "500": {
-                        "description": "Server Error"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/api/v1/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "login",
-                "operationId": "5fe087653c699d7c566550be7b05f2c3",
+                "operationId": "dec7c3a25e32283876bea9ba4e3885b0",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -122,7 +65,7 @@
                     "Auth"
                 ],
                 "summary": "signup",
-                "operationId": "7a9a7bbe767aab3fbf7fc369fe258f1b",
+                "operationId": "dc21a9ca3cb420fd0cf58cc6541f9ad2",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -176,6 +119,141 @@
                         "description": "Server Error"
                     }
                 }
+            }
+        },
+        "/api/v1/card": {
+            "post": {
+                "tags": [
+                    "Card"
+                ],
+                "summary": "store new card",
+                "operationId": "10aa39e9a858fafb9d0dc09fa5625d19",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "card_number",
+                                    "cvv",
+                                    "expiration"
+                                ],
+                                "properties": {
+                                    "card_number": {
+                                        "description": "Card Number",
+                                        "type": "string"
+                                    },
+                                    "cvv": {
+                                        "description": "Card CVV",
+                                        "type": "string"
+                                    },
+                                    "expiration": {
+                                        "description": "card expiry",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Card added Successfully"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/merchant": {
+            "get": {
+                "tags": [
+                    "Merchant"
+                ],
+                "summary": "List all merchants",
+                "operationId": "a608f7aa03aeff395d09b6fd57a75ae9",
+                "responses": {
+                    "200": {
+                        "description": "merchants retrieved success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Merchant"
+                ],
+                "summary": "add a new merchant",
+                "operationId": "bfb9a2d9bc112652fbc1d4f5ef31b0ca",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "website"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Merchant name",
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "description": "Merchant Website",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Merchant added Successfully"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },

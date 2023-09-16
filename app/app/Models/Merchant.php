@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Merchant extends Model
 {
     use HasFactory, HasUuids;
-    protected $fillable = [
-        'card_number',
-        'cvv',
-        'expiration',
-        'user_id'
+
+    protected  $fillable = [
+      'name',
+      'website'
     ];
 
-    public function user() {
-        $this->belongsTo(User::class);
-    }
-
     public function tasks() {
-        $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
     }
 }
