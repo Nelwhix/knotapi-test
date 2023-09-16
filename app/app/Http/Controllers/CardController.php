@@ -29,7 +29,7 @@ class CardController extends Controller
                 ))),
         tags: ["Card"],
         responses: [
-            new OA\Response(response: Response::HTTP_CREATED, description: "Register Successfully"),
+            new OA\Response(response: Response::HTTP_CREATED, description: "Card added Successfully"),
             new OA\Response(response: Response::HTTP_UNPROCESSABLE_ENTITY, description: "Unprocessable entity"),
             new OA\Response(response: Response::HTTP_BAD_REQUEST, description: "Bad Request"),
             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
@@ -39,7 +39,7 @@ class CardController extends Controller
         $fields = $request->validated();
 
         Card::create([
-            'user' => $request->user('api')->id,
+            'user_id' => $request->user()->id,
             'card_number' => $fields['card_number'],
             'cvv' => $fields['cvv'],
             'expiration' => $fields['expiration']
