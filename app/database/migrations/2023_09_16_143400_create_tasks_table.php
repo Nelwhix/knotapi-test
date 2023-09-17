@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('merchant_id');
             $table->foreignUuid('card_id');
             $table->foreignUuid('user_id');
+            $table->enum('status', Status::values())->default(Status::InProgress->value);
             $table->timestamps();
         });
     }

@@ -122,6 +122,32 @@
             }
         },
         "/api/v1/card": {
+            "get": {
+                "tags": [
+                    "Card"
+                ],
+                "summary": "Get all cards for the logged in user",
+                "operationId": "527c1e2639514c7b619fad99f94d2c49",
+                "responses": {
+                    "200": {
+                        "description": "cards retrieved success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Card"
@@ -238,6 +264,113 @@
                 "responses": {
                     "201": {
                         "description": "Merchant added Successfully"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/task": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "store a new task",
+                "operationId": "d5d9ffeaed4535efe2bcf37868edba2d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "card_id",
+                                    "merchant_id"
+                                ],
+                                "properties": {
+                                    "card_id": {
+                                        "description": "ID for a stored card on the system",
+                                        "type": "string"
+                                    },
+                                    "merchant_id": {
+                                        "description": "ID for a merchant on the system, you can find that at GET /api/v1/merchant",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Task added Successfully"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/task/{uuid}": {
+            "patch": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "update task status",
+                "operationId": "c7d3a9bf5e7d1bfefc4ead5a71d00eb9",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "task's uuid",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "description": "status of the task, 0 for failed. 1 for finished",
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Task updated Successfully"
                     },
                     "422": {
                         "description": "Unprocessable entity"

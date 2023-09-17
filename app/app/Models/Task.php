@@ -10,6 +10,12 @@ class Task extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        'user_id',
+        'merchant_id',
+        'card_id',
+    ];
+
     public function user() {
         $this->belongsTo(User::class);
     }

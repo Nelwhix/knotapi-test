@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCardRequest;
 use App\Models\Card;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Attributes as OA;
@@ -49,5 +50,30 @@ class CardController extends Controller
             'success' => true,
             'message' => 'Card added successfully'
         ], Response::HTTP_CREATED);
+    }
+
+    #[OA\Get(
+        path: "/api/v1/card",
+        summary: "Get all cards for the logged in user",
+        security: [
+            [
+                'bearerAuth' => []
+            ]
+        ],
+        tags: ["Card"],
+        responses: [
+            new OA\Response(response: Response::HTTP_OK, description: "cards retrieved success"),
+            new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
+            new OA\Response(response: Response::HTTP_NOT_FOUND, description: "not found"),
+            new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+        ]
+    )]
+    public function index(Request $request) {
+        $cards = User::where('id', $request->user()->id)->with('cards')->get();
+
+        return response([
+            'success' => true,
+            'data' => $cards
+        ]);
     }
 }
