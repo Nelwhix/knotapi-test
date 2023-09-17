@@ -204,6 +204,34 @@
                 ]
             }
         },
+        "/api/v1/task-history": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "get latest task history for a user",
+                "operationId": "0570dfb97f72c4991022b9f1adec3ec2",
+                "responses": {
+                    "200": {
+                        "description": "task history retrieved success"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/merchant": {
             "get": {
                 "tags": [
