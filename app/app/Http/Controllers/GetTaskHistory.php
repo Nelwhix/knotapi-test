@@ -48,14 +48,15 @@ class GetTaskHistory extends Controller
         )
 
         SELECT
-            lt.merchant_id,
-            t.card_id
+            t.merchant_id, lt.latest_task_id, t.card_id, t.status, c.card_number, t.created_at, t.updated_at, m.name as merchant_name
         FROM
             LatestTasks lt
         INNER JOIN
             tasks t ON lt.merchant_id = t.merchant_id AND lt.latest_task_id = t.id
         INNER JOIN
-            cards c ON t.card_id = c.id;
+            cards c ON t.card_id = c.id
+        INNER JOIN
+            merchants m ON t.merchant_id = m.id;
         ";
 
         $results = DB::select($query, ['user_id' => $request->user()->id]);
