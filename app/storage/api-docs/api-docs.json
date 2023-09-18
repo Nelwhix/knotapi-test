@@ -8,6 +8,10 @@
     "servers": [
         {
             "url": "http://localhost:8088",
+            "description": "local server"
+        },
+        {
+            "url": "https://red-glade-5480.fly.dev",
             "description": "knot-api server"
         }
     ],

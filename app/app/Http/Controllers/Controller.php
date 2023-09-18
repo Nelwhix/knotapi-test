@@ -9,7 +9,8 @@ use OpenApi\Attributes as OA;
 
 #[
     OA\Info(version: "1.0.0", description: "knot-api", title: "knot-api Documentation"),
-    OA\Server(url: 'http://localhost:8088', description: "knot-api server"),
+    OA\Server(url: 'http://localhost:8088', description: "local server"),
+    OA\Server(url: 'https://red-glade-5480.fly.dev', description: "knot-api server"),
     OA\SecurityScheme( securityScheme: 'bearerAuth', type: "http", name: "Authorization", in: "header", scheme: "bearer"),
 ]
 class Controller extends BaseController

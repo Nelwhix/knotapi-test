@@ -32,4 +32,4 @@ you can change the defaults by editing `docker-compose.yaml`
 ```
 then save your passport client id and secret in .env
 
-- Docs is on `http://localhost:8088/api/v1/docs`
+- Docs is on `https://red-glade-5480.fly.dev/api/v1/docs`
